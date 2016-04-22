@@ -13,7 +13,7 @@ optionnal **retax modules**.
 Check theses projects to learn how to use retax: [retax-client][retax-client-link] or [retax-server][retax-server-link].
 
 
-## How retax works?
+## What retax does?
 ### Bootstrapping
 When you bootstrap a retax application
 (whether on client or on server: the code of **retax-core** is 100% universal),
@@ -36,7 +36,7 @@ The rendering is delegated to these modules [retax-client][retax-client-link] or
 **retax-core** literally just *build* the application.
 
 ### Provide a inversion of control container to retax modules
-Your application will be wrapped by a component `<RetaxProvider />`. This component expose to its children a IoC container.
+Your application will be wrapped by a component `<RetaxProvider />`. This component exposes to its children a IoC container.
 This allows them to use dependency injection. This is highly used by all **retax modules**.
 
 
