@@ -1,0 +1,69 @@
+{
+  "name": "retax-core",
+  "version": "0.0.0",
+  "description": "Universal React Redux Framework",
+  "main": "lib/index.js",
+  "jsnext:main": "es/index.js",
+  "typings": "libTs/index.d.ts",
+  "scripts": {
+    "build": "builder run build",
+    "lint": "builder run lint",
+    "prepublish": "npm test && builder run build",
+    "pretest": "npm run typings && builder run lint",
+    "preversion": "npm test && builder run build",
+    "start": "builder run build:commonjs:watch",
+    "tdd": "builder run test:all:watch",
+    "test:once": "builder run test:all",
+    "test": "builder run test:all:coverage",
+    "typings": "builder run typings:install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/retaxJS/retax-core"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "framework",
+    "universal",
+    "retax",
+    "core"
+  ],
+  "author": "Thomas Hourlier <thomas.hourlier@cnode.fr>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/retaxJS/retax-core/issues"
+  },
+  "homepage": "https://github.com/retaxJS/retax-core",
+  "dependencies": {
+    "builder-ts-library": "~0.0.6",
+    "inversify": "^2.0.0-beta.1",
+    "js-cookie": "^2.1.0",
+    "retax-utils": "^1.0.0-alpha.0"
+  },
+  "devDependencies": {
+    "builder-ts-library-dev": "~0.0.6",
+    "builder": "^2.9.1",
+    "enzyme": "^2.2.0",
+    "immutable": "^3.8.0",
+    "react-addons-test-utils": "^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0-0",
+    "react-helmet": "^3.0.1",
+    "react-redux": "^4.4.5",
+    "react-router-redux": "^4.0.2",
+    "react-router": "^2.2.4",
+    "react": "^0.14.0 || ^15.0.0-0",
+    "redux-mock-store": "^1.0.2",
+    "redux": "^3.4.0"
+  },
+  "peerDependencies": {
+    "immutable": "^3.8.0",
+    "react-dom": "^0.14.0 || ^15.0.0-0",
+    "react-helmet": "^3.0.1",
+    "react-redux": "^4.4.5",
+    "react-router-redux": "^4.0.2",
+    "react-router": "^2.2.4",
+    "react": "^0.14.0 || ^15.0.0-0",
+    "redux": "^3.4.0"
+  }
+}
