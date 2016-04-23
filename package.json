@@ -64,6 +64,7 @@
     "react-router-redux": "^4.0.2",
     "react-router": "^2.2.4",
     "react": "^0.14.0 || ^15.0.0-0",
-    "redux": "^3.4.0"
+    "redux": "^3.4.0",
+    "retax-utils": "^1.0.0-alpha.1"
   }
 }
