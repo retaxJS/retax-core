@@ -6,6 +6,7 @@ import {
 import {
   IUserService,
 } from '../../Service';
+import { IRouterContextProps } from '../../../reactRouter';
 
 import { IAction } from 'retax-utils';
 
@@ -14,8 +15,8 @@ import { IAction } from 'retax-utils';
  */
 export interface ILifecycleService extends IActionsCreatorService {
   willResolveRoute?(hasToken: boolean): IAction<any, any>;
-  didResolveRoute?(renderProps: ReactRouter.IRouterContextProps): IAction<any, any>;
-  historyDidChanged?(location: HistoryModule.Location, renderProps: ReactRouter.IRouterContextProps): IAction<any, any>;
+  didResolveRoute?(renderProps: IRouterContextProps): IAction<any, any>;
+  historyDidChanged?(location: HistoryModule.Location, renderProps: IRouterContextProps): IAction<any, any>;
 }
 
 /**

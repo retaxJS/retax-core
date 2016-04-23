@@ -6,6 +6,7 @@ import { IReactRouterFacade, IMatchArgs, IMatchResult } from './interfaces';
 import { IRetaxConfigStore } from '../configStores';
 import { IReduxFacade } from '../redux';
 import { IContext } from '../context';
+import { IRouterContextProps } from '../reactRouter';
 
 import {
   CONTEXT,
@@ -15,7 +16,7 @@ import {
 
 @injectable()
 export default class ReactRouterFacade implements IReactRouterFacade {
-  private _renderProps: ReactRouter.IRouterContextProps;
+  private _renderProps: IRouterContextProps;
 
   constructor(
     @inject(CONTEXT) private _context: IContext,
@@ -23,7 +24,7 @@ export default class ReactRouterFacade implements IReactRouterFacade {
     @inject(RETAX_CONFIG_STORE) private _configStore: IRetaxConfigStore
   ) {}
 
-  get renderProps(): ReactRouter.IRouterContextProps {
+  get renderProps(): IRouterContextProps {
     if (!this._renderProps) {
       throw new Error('renderProps has not been initialized');
     }
@@ -31,13 +32,13 @@ export default class ReactRouterFacade implements IReactRouterFacade {
     return this._renderProps;
   }
 
-  public async initialize(): Promise<ReactRouter.IRouterContextProps> {
+  public async initialize(): Promise<IRouterContextProps> {
     this._renderProps = await this.resolveRoute();
 
     return this._renderProps;
   }
 
-  public async resolveRoute(): Promise<ReactRouter.IRouterContextProps> {
+  public async resolveRoute(): Promise<IRouterContextProps> {
     const { store } = this._reduxFacade;
     let resolutionTry = 0;
     let finalRenderProps;

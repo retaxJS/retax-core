@@ -6,7 +6,7 @@ import { IInversifyKernelFacade } from '../inversifyKernelFacade';
 import { ICookieProxy } from '../cookieProxies';
 import { IStateProxy } from '../stateProxies';
 import { IReduxFacade } from '../redux';
-import { IReactRouterFacade } from '../reactRouter';
+import { IReactRouterFacade, IRouterContextProps } from '../reactRouter';
 import { ILifecycleService } from '../components';
 import { IJSXBuilder } from '../JSXBuilders';
 import { IContext } from '../context';
@@ -68,7 +68,7 @@ export default class RetaxMediator implements IRetaxMediator {
     }
   }
 
-  private async _runPostRouteHook(renderProps: ReactRouter. IRouterContextProps): Promise<void> {
+  private async _runPostRouteHook(renderProps: IRouterContextProps): Promise<void> {
     if (this._lifecycleActionsCreator && this._lifecycleActionsCreator.didResolveRoute) {
       await this._reduxFacade.dispatch(
         this._lifecycleActionsCreator.didResolveRoute(renderProps)
