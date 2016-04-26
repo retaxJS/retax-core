@@ -59,8 +59,8 @@ This project is intensively used by **retax-core** and allow it to be **100% uni
 MIT License (MIT)
 
 
-[gitter-badge]: https://badges.gitter.im/hourliert/retax.svg
-[gitter-link]: https://gitter.im/hourliert/retax?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[gitter-badge]: https://badges.gitter.im/retaxJS/retax.svg
+[gitter-link]: https://gitter.im/retaxJS/retax?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [travis-badge]: https://travis-ci.org/retaxJS/retax-core.svg?branch=master
 [travis-link]: https://travis-ci.org/retaxJS/retax-core
 [version-badge]: https://badge.fury.io/js/retax-core.svg
