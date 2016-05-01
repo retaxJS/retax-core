@@ -37,11 +37,11 @@
   "homepage": "https://github.com/retaxJS/retax-core",
   "dependencies": {
     "builder-ts-library": "~0.0.6",
-    "inversify": "^2.0.0-beta.1",
     "immutable": "^3.8.0",
+    "inversify": "^2.0.0-beta.2",
     "js-cookie": "^2.1.0",
-    "retax-utils": "^1.0.0-alpha.1",
-    "redux": "^3.4.0"
+    "redux": "^3.4.0",
+    "retax-utils": "^1.0.0-alpha.1"
   },
   "devDependencies": {
     "builder-ts-library-dev": "~0.0.6",

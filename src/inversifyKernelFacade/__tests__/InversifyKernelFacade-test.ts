@@ -11,12 +11,12 @@ describe('InversifyKernelFacade', () => {
 
   const baseModules: IUserModule[] = [
     {
-      kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module1Id).toValue(1),
+      kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module1Id).toConstantValue(1),
       kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(module1Id),
       serviceId: module1Id,
     },
     {
-      kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module2Id).toValue(2),
+      kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module2Id).toConstantValue(2),
       kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(module2Id),
       serviceId: module2Id,
     },
@@ -36,7 +36,7 @@ describe('InversifyKernelFacade', () => {
     const module3Id = Symbol('module3');
     const userModules2: IUserModule[] = [
       {
-        kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module3Id).toValue(3),
+        kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module3Id).toConstantValue(3),
         kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(module3Id),
         serviceId: module3Id,
       },
@@ -67,8 +67,8 @@ describe('InversifyKernelFacade', () => {
     const modules: IUserModule[] = [
       {
         kernelModuleLoader: (kernel: IKernel): any => {
-          kernel.bind(moduleId).toValue(1);
-          kernel.bind(moduleId).toValue(2);
+          kernel.bind(moduleId).toConstantValue(1);
+          kernel.bind(moduleId).toConstantValue(2);
         },
         kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(moduleId),
         serviceId: moduleId,
@@ -88,7 +88,7 @@ describe('InversifyKernelFacade', () => {
     const moduleId = Symbol('module');
 
     const modules: IKernelModule[] = [
-      (kernel: IKernel): any => kernel.bind(moduleId).toValue(1),
+      (kernel: IKernel): any => kernel.bind(moduleId).toConstantValue(1),
     ];
 
     kernelFacade.loadKernelModules(modules);
