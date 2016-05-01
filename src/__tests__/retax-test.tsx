@@ -44,7 +44,7 @@ describe('Retax Core', () => {
     },
   };
 
-  pit('render a retax app', async () => {
+  pit('build a retax app', async () => {
     // configure history
     const history = createMemoryHistory();
     const location = history.createLocation('/home');

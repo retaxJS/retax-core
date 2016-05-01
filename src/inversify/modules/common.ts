@@ -29,7 +29,7 @@ export default function commonModule(kernel: IKernel): void {
 
 export function contextModuleFactory(context: IContext): IKernelModule {
   return function contextModule(kernel: IKernel): void {
-    kernel.bind<IContext>(CONTEXT).toValue(context);
+    kernel.bind<IContext>(CONTEXT).toConstantValue(context);
   };
 }
 
@@ -38,7 +38,7 @@ export function lifecycleModuleFactory(LifecycleActionsCreator: ILifecycleServic
     if (LifecycleActionsCreator) {
       kernel.bind<ILifecycleService>(LIFECYCLE_ACTIONS_CREATOR).to(LifecycleActionsCreator);
     } else {
-      kernel.bind<ILifecycleService>(LIFECYCLE_ACTIONS_CREATOR).toValue(undefined);
+      kernel.bind<ILifecycleService>(LIFECYCLE_ACTIONS_CREATOR).toConstantValue(undefined);
     }
   };
 }
