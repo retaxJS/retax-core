@@ -5,10 +5,9 @@
  */
 
 // components
-export const HTML_COMPONENT = Symbol('HtmlComponent');
 export const RETAX_PROVIDER_COMPONENT = Symbol('RetaxProviderComponent');
 export const RETAX_CONSUMER_COMPONENT = Symbol('RetaxConsumerComponent');
-export const COMPONENTS = { HTML_COMPONENT, RETAX_PROVIDER_COMPONENT, RETAX_CONSUMER_COMPONENT };
+export const COMPONENTS = { RETAX_PROVIDER_COMPONENT, RETAX_CONSUMER_COMPONENT };
 
 // config stores
 export const INTERNAL_CONFIG_STORE = Symbol('InternalConfigStore');

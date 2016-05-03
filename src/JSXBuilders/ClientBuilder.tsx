@@ -21,7 +21,7 @@ import {
 @injectable()
 export default class ClientBuilder implements IJSXBuilder {
   constructor(
-    @inject(RETAX_CONFIG_STORE) private _configStore: IRetaxConfigStore,
+    @inject(RETAX_CONFIG_STORE) private _retaxConfigStore: IRetaxConfigStore,
     @inject(RETAX_PROVIDER_COMPONENT) private RetaxProviderComponent: typeof RetaxProvider,
     @inject(REDUX_FACADE) private _reduxFacade: IReduxFacade,
     @inject(REACT_ROUTER_FACADE) private _routerFacade: IReactRouterFacade
@@ -29,7 +29,7 @@ export default class ClientBuilder implements IJSXBuilder {
 
   public build(kernel: IInversifyKernelFacade): JSX.Element {
     const { RetaxProviderComponent} = this;
-    const { react: { appendChild } } = this._configStore.config;
+    const { react: { appendChild } } = this._retaxConfigStore.config;
     const { store } = this._reduxFacade;
     const { renderProps } = this._routerFacade;
 

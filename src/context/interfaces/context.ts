@@ -7,15 +7,9 @@ export interface IAssets {
   styles?: Object;
 }
 
-export interface IIsomorphicTools {
-  assets(): IAssets;
-  development(inDevelopment: boolean): IIsomorphicTools;
-}
-
 export interface IRequestContext {
   req: Request;
   res: Response;
-  isomorphicTools?: IIsomorphicTools;
 }
 
 export interface IContext {
