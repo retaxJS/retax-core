@@ -3,21 +3,20 @@ import { injectable, inject } from 'inversify';
 import { IStateProxy } from './interfaces';
 import AStateConverter from './StateConverter';
 
-import { IInternalConfigStore, IRetaxConfigStore } from '../configStores';
+import { INITIAL_STATE_KEY } from '../constants';
+import { IRetaxConfigStore } from '../configStores';
 
-import { INTERNAL_CONFIG_STORE, RETAX_CONFIG_STORE } from '../inversify/identifiers';
+import { RETAX_CONFIG_STORE } from '../inversify/identifiers';
 
 @injectable()
 export default class DomStateProxy extends AStateConverter implements IStateProxy {
   constructor(
-    @inject(RETAX_CONFIG_STORE) private _retaxConfigStore: IRetaxConfigStore,
-    @inject(INTERNAL_CONFIG_STORE) private _internalConfigStore: IInternalConfigStore
+    @inject(RETAX_CONFIG_STORE) private _retaxConfigStore: IRetaxConfigStore
   ) {
     super();
   }
 
   public read<S>(): S {
-    const { INITIAL_STATE_KEY } = this._internalConfigStore.config;
     const { nonImmutableKeys } = this._retaxConfigStore.config.store;
 
     const serverState = window[INITIAL_STATE_KEY];

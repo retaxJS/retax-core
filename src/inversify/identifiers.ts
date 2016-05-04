@@ -10,9 +10,7 @@ export const RETAX_CONSUMER_COMPONENT = Symbol('RetaxConsumerComponent');
 export const COMPONENTS = { RETAX_PROVIDER_COMPONENT, RETAX_CONSUMER_COMPONENT };
 
 // config stores
-export const INTERNAL_CONFIG_STORE = Symbol('InternalConfigStore');
 export const RETAX_CONFIG_STORE = Symbol('RetaxConfigStore');
-export const CONFIG_STORES = { INTERNAL_CONFIG_STORE, RETAX_CONFIG_STORE };
 
 // cookie proxies
 export const COOKIE_PROXY = Symbol('CookieProxy');
