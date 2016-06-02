@@ -1,3 +1,4 @@
+import { injectable } from 'inversify';
 import { fromJS } from 'immutable';
 
 import { IStateConverter, IImmutableState } from './interfaces';
@@ -5,6 +6,7 @@ import { IStateConverter, IImmutableState } from './interfaces';
 /**
  * Feature inheritance. Not realy good practice...
  */
+@injectable()
 abstract class AStateConverter implements IStateConverter {
   public convertStateToImmutable<S extends IImmutableState>(object: Object = {}, nonImmutableKeys: string[] = []): S {
     const immutableObject: S = Object.keys(object).reduce((res: S, cur: string) => {
