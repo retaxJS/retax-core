@@ -1,3 +1,6 @@
+import { injectable } from 'inversify';
+
+@injectable()
 abstract class CookieProxy {
   get authToken(): string {
     return this._readAuthToken();
