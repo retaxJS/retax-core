@@ -55,6 +55,9 @@ export default class RetaxMediator implements IRetaxMediator {
     // history hook
     this._attachHistoryChangeHook();
 
+    // notify the user that everything is initialized
+    this._completeInitialization();
+
     return app;
   }
 
@@ -88,5 +91,11 @@ export default class RetaxMediator implements IRetaxMediator {
     this._reduxFacade.dispatch(
       this._lifecycleActionsCreator.historyDidChanged(location, renderProps)
     );
+  }
+
+  private _completeInitialization(): void {
+    if (this._lifecycleActionsCreator && this._lifecycleActionsCreator.initializationComplete) {
+      this._lifecycleActionsCreator.initializationComplete(this._reduxFacade.store);
+    }
   }
 }

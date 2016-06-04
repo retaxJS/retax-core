@@ -30,6 +30,7 @@ describe('Mediator Flow', () => {
   const lifecycleActions = {
     didResolveRoute: jest.fn(() => ({ didResolveRoute: true })),
     historyDidChanged: jest.fn(() => ({ historyDidChanged: true })),
+    initializationComplete: jest.fn(() => ({ initializationComplete: true })),
     willResolveRoute: jest.fn(() => ({ willResolveRoute: true })),
   };
 
@@ -68,6 +69,8 @@ describe('Mediator Flow', () => {
     expect(builder.build).toBeCalledWith(kernelFacade);
 
     expect(context.history.listen).toBeCalled();
+
+    expect(lifecycleActions.initializationComplete).toBeCalled();
 
     expect(app).toEqual({ theApp: true });
   });

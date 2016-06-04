@@ -1,3 +1,5 @@
+import { Store } from 'redux';
+
 import {
   IActionsCreatorService,
   IActionsCreatorServiceConstructor,
@@ -17,6 +19,7 @@ export interface ILifecycleService extends IActionsCreatorService {
   willResolveRoute?(hasToken: boolean): IAction<any, any>;
   didResolveRoute?(renderProps: IRouterContextProps): IAction<any, any>;
   historyDidChanged?(location: HistoryModule.Location, renderProps: IRouterContextProps): IAction<any, any>;
+  initializationComplete?(store: Store<any>): void;
 }
 
 /**
