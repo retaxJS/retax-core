@@ -1,10 +1,10 @@
-import { Kernel, IKernel, IKernelModule, injectable } from 'inversify';
+import { Kernel, interfaces, injectable } from 'inversify';
 
 import { IInversifyKernelFacade, IUserModule } from './interfaces';
 
 @injectable()
 export default class InversifyKernelFacade implements IInversifyKernelFacade {
-  private _kernel: IKernel;
+  private _kernel: interfaces.Kernel;
   private _loadedUserModules: Map<Symbol, boolean>;
 
   constructor() {
@@ -20,14 +20,14 @@ export default class InversifyKernelFacade implements IInversifyKernelFacade {
     return this._kernel.getAll<T>(serviceId);
   }
 
-  public loadKernelModules(modules: IKernelModule[] = []): void {
+  public loadKernelModules(modules: interfaces.KernelModule[] = []): void {
     this._kernel.load(...modules);
   }
 
   public loadModules(modules: IUserModule[] = []): void {
     modules.forEach(m => {
       if (!this._loadedUserModules.get(m.serviceId)) {
-        this._kernel.load(m.kernelModuleLoader);
+        this._kernel.load(m.kernelModule);
         this._loadedUserModules.set(m.serviceId, true);
       }
     });
@@ -36,7 +36,7 @@ export default class InversifyKernelFacade implements IInversifyKernelFacade {
   public unloadModules(modules: IUserModule[] = []): void {
     modules.forEach(m => {
       if (this._loadedUserModules.get(m.serviceId)) {
-        this._kernel.load(m.kernelModuleUnloader);
+        this._kernel.unload(m.kernelModule);
         this._loadedUserModules.set(m.serviceId, false);
       }
     });

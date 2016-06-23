@@ -1,4 +1,4 @@
-import { IKernel, IKernelModule } from 'inversify';
+import { interfaces, KernelModule } from 'inversify';
 
 import { RetaxProvider, ILifecycleService, ILifecycleServiceConstructor } from '../../components';
 import { IReactRouterFacade, ReactRouterFacade } from '../../reactRouter';
@@ -15,26 +15,27 @@ import {
   LIFECYCLE_ACTIONS_CREATOR,
 } from '../identifiers';
 
-export default function commonModule(kernel: IKernel): void {
-  kernel.bind<IRetaxMediator>(MEDIATOR).to(RetaxMediator).inSingletonScope();
-  kernel.bind<IReactRouterFacade>(REACT_ROUTER_FACADE).to(ReactRouterFacade).inSingletonScope();
-  kernel.bind<IReduxFacade>(REDUX_FACADE).to(ReduxFacade).inSingletonScope();
+export default new KernelModule((bind: interfaces.Bind) => {
+  bind<IRetaxMediator>(MEDIATOR).to(RetaxMediator).inSingletonScope();
+  bind<IReactRouterFacade>(REACT_ROUTER_FACADE).to(ReactRouterFacade).inSingletonScope();
+  bind<IReduxFacade>(REDUX_FACADE).to(ReduxFacade).inSingletonScope();
 
-  kernel.bind<typeof RetaxProvider>(COMPONENTS.RETAX_PROVIDER_COMPONENT).toConstructor(RetaxProvider);
+  bind<typeof RetaxProvider>(COMPONENTS.RETAX_PROVIDER_COMPONENT).toConstructor(RetaxProvider);
+});
+
+
+export function contextModuleFactory(context: IContext): interfaces.KernelModule {
+  return new KernelModule((bind: interfaces.Bind) => {
+    bind<IContext>(CONTEXT).toConstantValue(context);
+  });
 }
 
-export function contextModuleFactory(context: IContext): IKernelModule {
-  return function contextModule(kernel: IKernel): void {
-    kernel.bind<IContext>(CONTEXT).toConstantValue(context);
-  };
-}
-
-export function lifecycleModuleFactory(LifecycleActionsCreator: ILifecycleServiceConstructor): IKernelModule {
-  return function lifecycleModule(kernel: IKernel): void {
+export function lifecycleModuleFactory(LifecycleActionsCreator: ILifecycleServiceConstructor): interfaces.KernelModule {
+  return new KernelModule((bind: interfaces.Bind) => {
     if (LifecycleActionsCreator) {
-      kernel.bind<ILifecycleService>(LIFECYCLE_ACTIONS_CREATOR).to(LifecycleActionsCreator);
+      bind<ILifecycleService>(LIFECYCLE_ACTIONS_CREATOR).to(LifecycleActionsCreator);
     } else {
-      kernel.bind<ILifecycleService>(LIFECYCLE_ACTIONS_CREATOR).toConstantValue(undefined);
+      bind<ILifecycleService>(LIFECYCLE_ACTIONS_CREATOR).toConstantValue(undefined);
     }
-  };
+  });
 }

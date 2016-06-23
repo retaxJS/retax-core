@@ -7,7 +7,7 @@ import { shallow } from 'enzyme';
 import { createMemoryHistory, Route } from 'react-router';
 
 import {
-  clientModule, contextModuleFactory, lifecycleModuleFactory,
+  commonModule, clientModule, contextModuleFactory, lifecycleModuleFactory,
   MEDIATOR,
 } from '../inversify';
 import { IRetaxMediator } from '../mediator';
@@ -53,6 +53,7 @@ describe('Retax Core', () => {
     // create IOC kernel
     const inversifyKernelFacade = new InversifyKernelFacade();
     inversifyKernelFacade.loadKernelModules([
+      commonModule,
       clientModule,
       contextModuleFactory({ history, retaxConfig } as any),
       lifecycleModuleFactory(retaxConfig.lifecycle),

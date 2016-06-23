@@ -1,6 +1,4 @@
-import { IKernel } from 'inversify';
-
-import commonModule from './common';
+import { interfaces, KernelModule } from 'inversify';
 
 import { ICookieProxy, RequestCookieProxy } from '../../cookieProxies';
 import { IJSXBuilder, ServerBuilder } from '../../JSXBuilders';
@@ -14,11 +12,9 @@ import {
   STATE_PROXY,
 } from '../identifiers';
 
-export default function serverModule(kernel: IKernel): void {
-  kernel.load(commonModule);
-
-  kernel.bind<IRetaxConfigStore>(RETAX_CONFIG_STORE).to(RequestRetaxConfigStore).inSingletonScope();
-  kernel.bind<ICookieProxy>(COOKIE_PROXY).to(RequestCookieProxy).inSingletonScope();
-  kernel.bind<IStateProxy>(STATE_PROXY).to(RequestStateProxy).inSingletonScope();
-  kernel.bind<IJSXBuilder>(JSX_BUILDER).to(ServerBuilder);
-}
+export default new KernelModule((bind: interfaces.Bind) => {
+  bind<IRetaxConfigStore>(RETAX_CONFIG_STORE).to(RequestRetaxConfigStore).inSingletonScope();
+  bind<ICookieProxy>(COOKIE_PROXY).to(RequestCookieProxy).inSingletonScope();
+  bind<IStateProxy>(STATE_PROXY).to(RequestStateProxy).inSingletonScope();
+  bind<IJSXBuilder>(JSX_BUILDER).to(ServerBuilder);
+});

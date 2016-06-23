@@ -1,23 +1,23 @@
 jest.unmock('inversify');
 jest.unmock('../InversifyKernelFacade');
 
-import { IKernel, IKernelModule } from 'inversify';
+import { interfaces, KernelModule } from 'inversify';
 import { IUserModule } from '../interfaces';
 import InversifyKernelFacade from '../InversifyKernelFacade';
 
 describe('InversifyKernelFacade', () => {
   const module1Id = Symbol('module1');
   const module2Id = Symbol('module2');
+  const module1 = new KernelModule((bind: interfaces.Bind) => bind(module1Id).toConstantValue(1));
+  const module2 = new KernelModule((bind: interfaces.Bind) => bind(module2Id).toConstantValue(2));
 
   const baseModules: IUserModule[] = [
     {
-      kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module1Id).toConstantValue(1),
-      kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(module1Id),
+      kernelModule: module1,
       serviceId: module1Id,
     },
     {
-      kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module2Id).toConstantValue(2),
-      kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(module2Id),
+      kernelModule: module2,
       serviceId: module2Id,
     },
   ];
@@ -34,10 +34,11 @@ describe('InversifyKernelFacade', () => {
     expect(kernelFacade.getService(module2Id)).toEqual(2);
 
     const module3Id = Symbol('module3');
+    const module3 = new KernelModule((bind: interfaces.Bind) => bind(module3Id).toConstantValue(3));
+
     const userModules2: IUserModule[] = [
       {
-        kernelModuleLoader: (kernel: IKernel): any => kernel.bind(module3Id).toConstantValue(3),
-        kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(module3Id),
+        kernelModule: module3,
         serviceId: module3Id,
       },
     ];
@@ -63,14 +64,14 @@ describe('InversifyKernelFacade', () => {
     const kernelFacade = new InversifyKernelFacade();
 
     const moduleId = Symbol('module');
+    const myModule = new KernelModule((bind: interfaces.Bind) => {
+      bind(moduleId).toConstantValue(1);
+      bind(moduleId).toConstantValue(2);
+    });
 
     const modules: IUserModule[] = [
       {
-        kernelModuleLoader: (kernel: IKernel): any => {
-          kernel.bind(moduleId).toConstantValue(1);
-          kernel.bind(moduleId).toConstantValue(2);
-        },
-        kernelModuleUnloader: (kernel: IKernel): any => kernel.unbind(moduleId),
+        kernelModule: myModule,
         serviceId: moduleId,
       },
     ];
@@ -87,8 +88,8 @@ describe('InversifyKernelFacade', () => {
 
     const moduleId = Symbol('module');
 
-    const modules: IKernelModule[] = [
-      (kernel: IKernel): any => kernel.bind(moduleId).toConstantValue(1),
+    const modules: interfaces.KernelModule[] = [
+      new KernelModule((bind: interfaces.Bind) => bind(moduleId).toConstantValue(1)),
     ];
 
     kernelFacade.loadKernelModules(modules);

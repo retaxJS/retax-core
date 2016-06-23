@@ -1,16 +1,15 @@
-import { IKernelModule } from 'inversify';
+import { interfaces } from 'inversify';
 
 export interface IUserModule {
   serviceId: Symbol;
-  kernelModuleLoader: IKernelModule;
-  kernelModuleUnloader: IKernelModule;
+  kernelModule: interfaces.KernelModule;
 }
 
 export interface IInversifyKernelFacade {
   getService<T>(serviceId: Symbol): T;
   getAllServices<T>(serviceId: Symbol): T[];
 
-  loadKernelModules(modules: IKernelModule[]): void;
+  loadKernelModules(modules: interfaces.KernelModule[]): void;
   loadModules(modules: IUserModule[]): void;
   unloadModules(modules: IUserModule[]): void;
 }
